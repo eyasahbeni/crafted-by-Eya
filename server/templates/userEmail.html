@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      animation: fadeSlideIn 1s ease-in-out;
+    }
+    h2 {
+      color: #2d3436;
+    }
+    p {
+      font-size: 16px;
+      color: #636e72;
+      margin: 10px 0;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #b2bec3;
+      text-align: center;
+    }
+    @keyframes fadeSlideIn {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Hello {{name}},</h2>
+    <p>Thank you so much for reaching out! 🌟</p>
+    <p>I’ve received your message and I will get back to you shortly. I appreciate your interest and your time.</p>
+    <p>If your request is urgent, feel free to reach out directly at <strong>{{adminEmail}}</strong>.</p>
+    <p>Until then, stay awesome! 😎</p>
+    <div class="footer">
+      Crafted by Eya | Your Personal Portfolio Assistant
+    </div>
+  </div>
+</body>
+</html>
