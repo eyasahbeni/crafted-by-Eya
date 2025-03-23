@@ -24,10 +24,11 @@ This project is not just code — it’s a story. A journey. A collection of eve
 
 ## 🛠 Tech Stack
 
-| Frontend       | Backend        | Styling         |
-|----------------|----------------|------------------|
-| Next.js ⚡       | Express.js 🚀   | Tailwind CSS 💅  |
-| TypeScript 💡   | Node.js 🌱     | Responsive UI 📱 |
+| Frontend       | Backend           | Database         | Styling         |
+|----------------|-------------------|------------------|------------------|
+| Next.js ⚡       | Express.js 🚀       | PostgreSQL 🐘      | Tailwind CSS 💅  |
+| TypeScript 💡   | Node.js 🌱         | Sequelize ORM 🔗  | Responsive UI 📱 |
+
 
 ---
 
