@@ -1,112 +1,134 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import Link from "next/link"
+import { useEffect, useState } from "react"
 
-export default function Hero() {
-  const [mounted, setMounted] = useState(false)
+const Hero = () => {
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
+    setIsVisible(true)
   }, [])
 
-  if (!mounted) return null
-
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center text-center px-4 md:px-6 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10 bg-hero-pattern"></div>
-      
-      {/* Animated blobs */}
-      <div className="blob w-[300px] h-[300px] bg-theme-purple/20 top-[20%] left-[15%] animate-float"></div>
-      <div className="blob w-[250px] h-[250px] bg-theme-pink/20 bottom-[20%] right-[15%] animate-float animation-delay-2000"></div>
-      <div className="blob w-[200px] h-[200px] bg-theme-blue/20 bottom-[30%] left-[20%] animate-float animation-delay-4000"></div>
-      
-      {/* Animated circles */}
-      <div className="absolute top-20 left-20 w-64 h-64 border border-primary/20 rounded-full animate-rotate opacity-20"></div>
-      <div className="absolute bottom-20 right-20 w-40 h-40 border border-theme-pink/20 rounded-full animate-rotate opacity-20"></div>
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="space-y-6 max-w-3xl relative z-10"
-      >
-        <div className="inline-flex items-center px-3 py-1 rounded-full border border-primary/30 bg-primary/5 text-sm text-primary mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4">
-            <path d="M15 4V2"></path>
-            <path d="M15 16v-2"></path>
-            <path d="M8 9h2"></path>
-            <path d="M20 9h2"></path>
-            <path d="M17.7 11.7l1.5-1.5"></path>
-            <path d="M15 9h0"></path>
-            <path d="M2 12h2"></path>
-            <path d="M8.3 20.4l-1.5-1.5"></path>
-            <path d="M8.3 3.6l-1.5 1.5"></path>
-            <path d="M20.4 16.7l-1.5 1.5"></path>
-            <path d="M4.7 4.7l1.5 1.5"></path>
-          </svg>
-          <span>Full Stack Developer</span>
+    <section
+      id="home"
+      className="relative min-h-screen pt-24 md:pt-0 pb-16 md:pb-0 flex items-center overflow-hidden bg-gradient-to-b from-black to-gray-900"
+    >
+      {/* Grid background */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute inset-0 grid grid-cols-12 gap-1">
+          {Array.from({ length: 12 }).map((_, colIndex) =>
+            Array.from({ length: 12 }).map((_, rowIndex) => (
+              <div
+                key={`${colIndex}-${rowIndex}`}
+                className="border border-gray-700"
+                style={{
+                  animationDelay: `${(colIndex + rowIndex) * 100}ms`,
+                  animation: "pulse 10s infinite alternate",
+                }}
+              ></div>
+            )),
+          )}
         </div>
-        
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-          Hi, I'm <span className="text-gradient glow-text">Your Name</span>
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-          I build <span className="text-gradient-blue font-semibold">innovative</span> and 
-          <span className="text-gradient-orange font-semibold"> beautiful</span> web applications 
-          that solve real-world problems.
-        </p>
-        
-        <div className="flex flex-wrap gap-4 justify-center pt-6">
-          <Link href="#projects" className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-gradient-primary hover:opacity-90 transition-opacity shadow-lg text-white">
-            View Projects 
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2 h-4 w-4">
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
-            </svg>
-          </Link>
-          <Link href="#contact" className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground animated-border">
-            Contact Me
-          </Link>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div
+            className={`flex flex-col transition-all duration-1000 transform ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+              Hi, I'm{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+                Your Name
+              </span>
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-medium text-gray-400 mb-6">Full Stack Developer</h2>
+            <p className="max-w-2xl text-lg md:text-xl text-gray-400 mb-8">
+              I build modern web applications with Next.js, TypeScript, and Tailwind CSS. Passionate about creating
+              clean, user-friendly experiences.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-medium transition-all duration-300 transform hover:scale-105"
+              >
+                View Projects
+                <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-md border border-purple-500 text-purple-500 hover:bg-purple-500/10 font-medium transition-all duration-300 transform hover:scale-105"
+              >
+                Contact Me
+              </a>
+            </div>
+
+            <div className="flex space-x-4">
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full hover:bg-purple-500/10 hover:text-purple-400 transition-all duration-300 transform hover:scale-110"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+                <span className="sr-only">GitHub</span>
+              </a>
+              <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full hover:bg-purple-500/10 hover:text-purple-400 transition-all duration-300 transform hover:scale-110"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+                <span className="sr-only">LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <div
+            className={`hidden lg:flex justify-center items-center transition-all duration-1000 delay-300 transform ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            <div className="relative w-80 h-80">
+              {/* Animated circles */}
+              <div className="absolute inset-0 rounded-full border-2 border-purple-500/30 animate-ping-slow"></div>
+              <div className="absolute inset-4 rounded-full border-2 border-cyan-500/30 animate-ping-slow animation-delay-1000"></div>
+              <div className="absolute inset-8 rounded-full border-2 border-purple-500/30 animate-ping-slow animation-delay-2000"></div>
+
+              {/* Profile image placeholder */}
+              <div className="absolute inset-12 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 p-1">
+                <div className="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
+                  <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+                    YN
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div className="flex justify-center gap-4 pt-8">
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full w-10 h-10 bg-background/80 backdrop-blur-sm border border-primary/20 hover:bg-primary/10">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-                <path d="M9 18c-4.51 2-5-2-7-2"></path>
-              </svg>
-              <span className="sr-only">GitHub</span>
-            </Link>
-          </motion.div>
-          
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Link href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full w-10 h-10 bg-background/80 backdrop-blur-sm border border-primary/20 hover:bg-primary/10">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect width="4" height="12" x="2" y="9"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-              <span className="sr-only">LinkedIn</span>
-            </Link>
-          </motion.div>
+      </div>
+
+      {/* Animated scroll indicator */}
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+        <div className="w-6 h-10 rounded-full border-2 border-gray-500 flex justify-center p-1">
+          <div className="w-1 h-2 bg-purple-500 rounded-full animate-bounce-slow"></div>
         </div>
-      </motion.div>
-      
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 1.5 }}
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex justify-center pt-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-primary animate-bounce"></div>
-        </div>
-      </motion.div>
+        <span className="text-xs text-gray-500 mt-2">Scroll Down</span>
+      </div>
     </section>
   )
 }
+
+export default Hero
+

@@ -1,27 +1,18 @@
-import type React from "react"
-import { Inter } from "next/font/google"
-
-import "./globals.css"
-
-const inter = Inter({ subsets: ["latin"] })
+// src/app/layout.tsx
+import type { ReactNode } from "react";
+import "./globals.css";
 
 export const metadata = {
-  title: "Your Name | Portfolio",
+  link: 
+    { rel: "icon", href: "/client/rocket icon.png" },
+  title: " 🚀 Eya Sahbeni | Portfolio",
   description: "Full Stack Developer specializing in modern web applications",
-}
+};
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-  {children}
-</body>
-
+    <html lang="en">
+      <body>{children}</body>
     </html>
-  )
+  );
 }
-
