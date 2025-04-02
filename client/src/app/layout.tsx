@@ -3,16 +3,19 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata = {
-  link: 
-    { rel: "icon", href: "/client/rocket icon.png" },
-  title: " 🚀 Eya Sahbeni | Portfolio",
+  title: " Eya Sahbeni | Portfolio",
   description: "Full Stack Developer specializing in modern web applications",
+  icons: { rel: "icon", url: "/image.png" }, // ✅ Correct favicon path
 };
+
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+       <head>
+       <link rel="icon" href={metadata.icons.url} type="image/png" />
+      </head>
+          <body suppressHydrationWarning={true}>{children}</body>
     </html>
   );
 }
